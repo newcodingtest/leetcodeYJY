@@ -19,13 +19,13 @@ public class Boj_11726 {
         int m = Integer.parseInt(br.readLine());
         dp = new int[m + 1];
 
-     /*   for(int i=1; i<=m; i++){
-            if(i==1) dp[i]=1;
-            else if(i==2) dp[i]=2;
-            else dp[i]=(dp[i-1]+dp[i-2])%10007;
-        }
+             /*   for(int i=1; i<=m; i++){
+                    if(i==1) dp[i]=1;
+                    else if(i==2) dp[i]=2;
+                    else dp[i]=(dp[i-1]+dp[i-2])%10007;
+                }
 
-        System.out.println(dp[m]);
+                System.out.println(dp[m]);
 */
         dp[1] = 1;
         dp[2] = 2;

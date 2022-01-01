@@ -15,6 +15,8 @@ public class Boj_10824 {
         StringBuilder sb = new StringBuilder();
         long odd=Long.parseLong(input[0]+input[1]);
         long even=Long.parseLong(input[2]+input[3]);
+        System.out.println(odd);
+        System.out.println(even);
 
         sb.append(odd+even);
         bw.write(sb.toString());

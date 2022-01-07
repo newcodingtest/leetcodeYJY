@@ -1,5 +1,7 @@
 package 백준;
 
+import sun.misc.GC;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -15,14 +17,22 @@ public class Boj_9613 {
 
         while(n-->0){
             String[] input = br.readLine().split(" ");
-            for (int i=1; i<input.length; i++){
-                int r=GCD(Integer.parseInt(input[i-1]),Integer.parseInt(input[i]));
-                int temp =
-                for (int j=1; j<input.length; j++){
+            int c =Integer.parseInt(input[0]);
 
+            int[] arr = new int[c];
+            for (int i = 0; i< arr.length; i++){
+                arr[i]=Integer.parseInt(input[i+1]);
+            }
+            long result = 0;
+            for (int i = 0; i< arr.length-1; i++){
+                for (int j = i+1; j< arr.length; j++){
+                    result+=GCD(arr[i],arr[j]);
                 }
             }
+            bw.write(result+"\n");
         }
+        bw.flush();
+        bw.close();
     }
 
     public static int GCD(int a, int b){

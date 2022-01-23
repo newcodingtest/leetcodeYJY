@@ -1,6 +1,5 @@
-package 백준.그래프검색.DFS;
+package 백준.그래프검색.BFS;
 
-import java.awt.font.FontRenderContext;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;

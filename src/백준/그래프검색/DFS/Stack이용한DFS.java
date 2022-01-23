@@ -1,4 +1,4 @@
-package 백준.그래프검색.BFS;
+package 백준.그래프검색.DFS;
 
 import java.util.LinkedList;
 import java.util.Stack;

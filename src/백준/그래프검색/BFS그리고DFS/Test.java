@@ -1,3 +1,4 @@
+/*
 package 백준.그래프검색.BFS그리고DFS;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -93,7 +94,9 @@ class Graph{
         }
     }
 
-    /* Stack을 이용한 DFS 구현*/
+    */
+/* Stack을 이용한 DFS 구현*//*
+
     void dfs(){
         dfs(0);
     }
@@ -114,7 +117,9 @@ class Graph{
         }
     }
 
-    /* 재귀 호출을 이용한 DFS 구현 */
+    */
+/* 재귀 호출을 이용한 DFS 구현 *//*
+
     void dfsR(Node r){
         if(r==null) return;
         r.marked = true;
@@ -134,7 +139,9 @@ class Graph{
         dfsR(0);
     }
 
-    /* Queue를 이용한 BFS 구현 */
+    */
+/* Queue를 이용한 BFS 구현 *//*
+
     void bfs(){
         bfs(0);
     }
@@ -161,6 +168,7 @@ class Graph{
         System.out.print(n.data+" ");
     }
 }
+*/
 /*
   0
  /
@@ -169,7 +177,8 @@ class Graph{
 | /  |  5
 2ㅡㅡ4   \
           6ㅡ8
-*/
+*//*
+
 public class Test{
     public static void main(String[] args){
         Graph g = new Graph(9);
@@ -186,4 +195,4 @@ public class Test{
         g.dfs();
         g.dfsR();
     }
-}
+}*/

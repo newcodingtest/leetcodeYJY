@@ -45,13 +45,13 @@ public class Boj_1967 {
                     list[x].add(new Node3(z,y));
         }
         br.close();
-        bfs(1,0);
+        dfs(1,0);
         visited = new boolean[n+1];
-        bfs(index,0);
+        dfs(index,0);
         System.out.println(min);
     }
 
-    public static void bfs(int node , int distance){
+    public static void dfs(int node , int distance){
         visited[node] = true;
 
         if(distance > min){
@@ -66,7 +66,7 @@ public class Boj_1967 {
             if(!visited[temp_node]){
                 visited[temp_node]=true;
 
-                bfs(temp_node,distance+temp_cost);
+                dfs(temp_node,distance+temp_cost);
             }
         }
 

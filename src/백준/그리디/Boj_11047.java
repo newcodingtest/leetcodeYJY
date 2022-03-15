@@ -15,7 +15,7 @@ public class Boj_11047 {
 
         int[] arr = new int[cnt];
 
-        for(int i =0; i<cnt; i++){
+        for(int i =0; i<cnt; i++){   
             arr[i] = Integer.parseInt(br.readLine());
         }
 

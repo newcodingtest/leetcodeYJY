@@ -1,6 +1,12 @@
 package 백준.그래프검색;
 
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
 class Tomato{
     int w;
     int h;
@@ -19,7 +25,7 @@ public class Boj_7576{
     static int[] dw = {0,0,-1,1};// 가로
 
     static int[][] map;
-    static Queue<Tomato>queue;
+    static Queue<Tomato> queue;
     public static void main(String[] args)throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -29,7 +35,7 @@ public class Boj_7576{
 
         map = new int[h][w];
 
-        queue= new LinkedList<Tomato>();
+        queue= new LinkedList<>();
 
 
         for (int i = 0; i < h; i++) {

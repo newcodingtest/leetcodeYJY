@@ -1,5 +1,13 @@
 package 백준.그래프검색;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
 public class Boj_4963 {
     static int n,m;
     static int[] y = {-1,1,-1,1,0,-1,0,1};
@@ -25,7 +33,7 @@ public class Boj_4963 {
 
             map = new int[m][n];
             visit = new boolean[m][n];
-            list = new ArrayList<Integer>();
+            list = new ArrayList<>();
 
             for(int i = 0; i<m; i++) {
                 st = new StringTokenizer(br.readLine());

@@ -1,5 +1,11 @@
 package 백준.그래프검색;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Boj_2667 {
     static int N;
     static int[] x = {-1,1,0,0}; //상하좌우
@@ -14,7 +20,7 @@ public class Boj_2667 {
         N = Integer.parseInt(br.readLine());
         map = new int[N+1][N+1];
         visit = new boolean[N+1][N+1];
-        list = new ArrayList<Integer>();
+        list = new ArrayList<>();
 
         for(int i=0; i<N; i++) {
             String input = br.readLine();

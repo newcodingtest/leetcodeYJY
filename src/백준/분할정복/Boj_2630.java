@@ -1,10 +1,10 @@
-package 분할정복;
+package 백준.분할정복;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Boj_1780 {
+public class Boj_2630 {
     static int[][] arr;
     static int minus,zero,one;
     public static void main(String[] args)throws Exception{
@@ -26,7 +26,7 @@ public class Boj_1780 {
         }
 
         partition(0,0,cnt);
-        System.out.println(minus);
+
         System.out.println(zero);
         System.out.println(one);
 
@@ -39,27 +39,18 @@ public class Boj_1780 {
                 zero++;
             }else if(arr[row][col]==1){
                 one++;
-            }else if(arr[row][col]==-1){
-                minus++;
             }
             return;
         }
 
-        int diviedSize = size / 3;
+        int diviedSize = size / 2;
 
         partition(row, col, diviedSize);
         partition(row, col+diviedSize, diviedSize);
-        partition(row, col+2*diviedSize,diviedSize);
-
         partition(row+diviedSize, col, diviedSize);
         partition(row+diviedSize, col+diviedSize, diviedSize);
-        partition(row+diviedSize, col+2*diviedSize, diviedSize);
-
-        partition(row+2*diviedSize, col, diviedSize);
-        partition(row+2*diviedSize, col+diviedSize, diviedSize);
-        partition(row+2*diviedSize, col+2*diviedSize, diviedSize);
     }
-
+    
     //같은 수 인지 판단
     private static boolean checkSameColor(int row, int col, int size){
         int color = arr[row][col];
@@ -74,4 +65,3 @@ public class Boj_1780 {
         return true;
     }
 }
-

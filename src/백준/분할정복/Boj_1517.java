@@ -1,10 +1,7 @@
-package 분할정복;
-
-import jdk.nashorn.internal.ir.WhileNode;
+package 백준.분할정복;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Boj_1517 {

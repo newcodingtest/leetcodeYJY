@@ -1,5 +1,6 @@
 package 프로그래머스.level1;
 
+
 public class 가운데글자가져오기 {
     public static String solution(String s) {
         String answer = s;

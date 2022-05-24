@@ -26,35 +26,35 @@ public class 키패드누르기    {
 
         for (int i=0; i<numbers.length; i++){
             int temp = numbers[i];
-                //윈쪽 오른쪽 라인인 경우
-                if(isRight(temp)){
-                    sb.append('R');
-                    tempRight = temp;
-                }else if(isLeft(temp)){
-                    sb.append('L');
-                    tempLeft = temp;
-                }
-                //중간 라인 경우
-                else{
+            //윈쪽 오른쪽 라인인 경우
+            if(isRight(temp)){
+                sb.append('R');
+                tempRight = temp;
+            }else if(isLeft(temp)){
+                sb.append('L');
+                tempLeft = temp;
+            }
+            //중간 라인 경우
+            else{
 
-                    //최근 오른쪽, 왼쪽 좌표값 비교를 통해 짧은 쪽을 택한다.
+                //최근 오른쪽, 왼쪽 좌표값 비교를 통해 짧은 쪽을 택한다.
 
-                    int right = cal(temp,tempRight);
-                    int left  = cal(temp,tempLeft);
+                int right = cal(temp,tempRight);
+                int left  = cal(temp,tempLeft);
 
-                    if(right>left){
-                        tempLeft=temp;
-                        sb.append("L");
-                    }else if(right<left){
+                if(right>left){
+                    tempLeft=temp;
+                    sb.append("L");
+                }else if(right<left){
+                    tempRight=temp;
+                    sb.append("R");
+                }else{
+                    if(hand.equals("right")){
                         tempRight=temp;
                         sb.append("R");
-                    }else{
-                        if(hand.equals("right")){
-                            tempRight=temp;
-                            sb.append("R");
-                        }else if(hand.equals("left")){
-                            tempLeft=temp   ;
-                            sb.append("L");
+                    }else if(hand.equals("left")){
+                        tempLeft=temp   ;
+                        sb.append("L");
                     }
                 }
             }
@@ -99,11 +99,7 @@ public class 키패드누르기    {
         int lx = (location-1)/3;
         int ly = (location-1)%3;
 
-         return Math.abs(mx-lx) + Math.abs(my-ly);
+        return Math.abs(mx-lx) + Math.abs(my-ly);
 
     }
-
-
-
-
 }

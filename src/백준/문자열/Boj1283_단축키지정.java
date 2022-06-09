@@ -15,9 +15,7 @@ import java.util.*;
 
 public class Boj1283_단축키지정 {
     static Map<Character,Boolean> key = new HashMap<>();
-    static StringBuilder sb = new StringBuilder();
     static String[] arr;
-    static String[] result;
     static BufferedWriter bw;
     public static void main(String[] args)throws Exception{
         BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));

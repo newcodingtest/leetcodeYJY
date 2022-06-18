@@ -44,4 +44,4 @@ public class Boj_2491수열 {
         System.out.println(max);
     }
     }
-}
+

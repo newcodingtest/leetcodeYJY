@@ -1,8 +1,13 @@
 package 백준.문자열;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
+import java.util.StringTokenizer;
 public class Boj_2491수열 {
     static int[] dp;
-    public static void main(String[] args){
+    public static void main(String[] args)throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 

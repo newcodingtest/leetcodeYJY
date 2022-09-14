@@ -77,7 +77,7 @@ public class 주차요금계산 {
     }
 
     public static int calculate(int totalTime, int[] fees){
-        int result = 0;
+        int result = 0;   
 
         int baseTime = fees[0];
         int baseFee = fees[1];

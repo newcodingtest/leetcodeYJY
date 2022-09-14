@@ -4,6 +4,7 @@ package 프로그래머스.level2;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class 주차요금계산 {
     static final SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
@@ -20,45 +21,52 @@ public class 주차요금계산 {
         int[] fees3 = {1, 461, 1, 10};
         String[] records3 ={"00:00 1234 IN"};
 
-        Arrays.stream(solution(fees1, records1)).forEach(x -> {
+        Arrays.stream(solution(fees3, records3)).forEach(x -> {
             System.out.println(x);
         });
 
     }
 
     public static int[] solution(int[] fees, String[] records) throws ParseException {
-        Map<String, InOutRecords> check = new LinkedHashMap<>();
-        Map<String, Integer> accumulate = new LinkedHashMap<>();
+        Map<Integer, InOutRecords> check = new ConcurrentHashMap<>();
+        Map<Integer, Integer> accumulate = new HashMap<>();
 
 
         for(String info : records){
             String[] temp = info.split(" ");
-            if(check.containsKey(temp[1])){
+            int key = Integer.valueOf(temp[1]);
+            if(check.containsKey(key)){
                 if(temp[2].equals("OUT")) {
-                    int min = totalTimeByMin(check.get(temp[1]).getTime(),temp[0]);
+                    int min = totalTimeByMin(check.get(key).getTime(),temp[0]);
+
                    // int totalFee = calculate(check.get(temp[1]).getTime(), temp[0], fees);
-                    accumulate.put(temp[1],accumulate.get(temp[1])+min);
-                    check.remove(temp[1]);
+                    accumulate.put(key,accumulate.get(key)+min);
+                    check.remove(key);
                 }
             }else{
-                check.put(temp[1], new InOutRecords(temp[0],temp[1],temp[2]));
-                accumulate.put(temp[1],accumulate.getOrDefault(temp[1],0));
+                check.put(key, new InOutRecords(temp[0],key,temp[2]));
+                accumulate.put(key,accumulate.getOrDefault(key,0));
             }
         }
         
         //마지막 한번더 검사
         //마지막으로 계산제거가 안되고 남은요소는 23:59 OUT 으로 요금을 계산한다.
-        Iterator<String> keys = check.keySet().iterator();
-        while(keys.hasNext()){
-            String key = keys.next();
-            //int totalFee = calculate(check.get(key).getTime(), "23:59", fees);
-            int min = totalTimeByMin(check.get(key).getTime(),lastTime);
-            accumulate.put(key,accumulate.get(key)+min);
-            check.remove(key);
+        if(check.size()>0) {
+            Iterator<Integer> keys = check.keySet().iterator();
+            while (keys.hasNext()) {
+                int key = keys.next();
+                //int totalFee = calculate(check.get(key).getTime(), "23:59", fees);
+                int min = totalTimeByMin(check.get(key).getTime(), lastTime);
+                accumulate.put(key, accumulate.get(key) + min);
+                check.remove(key);
+            }
         }
         //차량번호로 정렬필요
-        int[] answer = accumulate.entrySet().stream().mapToInt(value-> calculate(value.getValue(),fees)).toArray();
-       return Arrays.stream(answer).boxed().sorted(Collections.reverseOrder()).mapToInt(Integer::intValue).toArray();
+        return accumulate.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .mapToInt(value-> calculate(value.getValue(),fees))
+                .toArray();
     }
 
     public static int totalTimeByMin(String from, String to) throws ParseException {
@@ -86,12 +94,12 @@ public class 주차요금계산 {
     }
     static class InOutRecords{
         String time;
-        String carNumber;
+        int carNumber;
         String in_Out;
 
         int accumulate;
 
-        public InOutRecords(String t, String carNm, String io){
+        public InOutRecords(String t, int carNm, String io){
             this.time = t;
             this.carNumber = carNm;
             this.in_Out = io;

@@ -35,7 +35,6 @@ public class Boj7576_토마토 {
             }
         }
 
-
         System.out.println(DFS());
 
     }
@@ -56,7 +55,7 @@ public class Boj7576_토마토 {
                 max = Math.max(max, tomato[i][j]);
             }
         }
-        
+
         return max-1;
     }
 

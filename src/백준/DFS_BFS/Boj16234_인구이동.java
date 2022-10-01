@@ -40,7 +40,7 @@ public class Boj16234_인구이동 {
     public static int move(){
         int result = 0;
         while(true){
-            boolean isMove = false;  
+            boolean isMove = false;
             visited = new boolean[N][N];
             for (int i=0; i<N; i++){
                 for (int j=0; j<N; j++){

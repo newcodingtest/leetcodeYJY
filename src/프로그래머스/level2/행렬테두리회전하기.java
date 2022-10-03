@@ -19,7 +19,7 @@ public class 행렬테두리회전하기 {
 
             }
         }
-  
+
         int[] answer = new int[queries.length];
         int rotationCnt = 0;
         for(int[] point : queries){

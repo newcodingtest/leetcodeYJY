@@ -16,9 +16,9 @@ public class Boj13023_ABCDE {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[N];
+
         list = new List[N];
-   
+
         for (int i=0; i<N; i++){
             list[i] = new ArrayList<>();
         }
@@ -29,13 +29,21 @@ public class Boj13023_ABCDE {
             list[x].add(y);
             list[y].add(x);
         }
-        DFS(0,1);
-        System.out.println(0);
 
+        for (int i=0; i<N; i++){
+            visited = new boolean[N];
+            if(!visited[i]){
+                visited[i]=true;
+                DFS(i,0);
+                visited[i]=false;
+            }
+
+        }
+        System.out.println(0);
     }
 
     public static void DFS(int x, int len){
-        if(len==5){
+        if(len==4){
             System.out.println(1);
             System.exit(0);
         }

@@ -14,6 +14,7 @@ public class Boj2636_치즈 {
     static int[] rows = {-1,1,0,0};
     static int[] cols = {0,0,-1,1};
     static int N,M;
+    static List<Integer> cheezeCnt = new ArrayList<>();
     public static void main(String[] args)throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -24,7 +25,6 @@ public class Boj2636_치즈 {
 
         cheeze = new int[N][M];
         time = new int[N][M];
-        visited = new boolean[N][M];
 
         for (int i=0; i<N; i++){
             String[] str = br.readLine().split(" ");
@@ -32,27 +32,31 @@ public class Boj2636_치즈 {
                 cheeze[i][j] = Integer.parseInt(str[j]);
             }
         }
-
-        start();
-    }
-
-
-    public static void start(){
-        int result = 0;
+        int initial = count();
+        boolean flag = true;
         int cnt = 0;
-        System.out.println(count());
-        for (int i=0; i<N; i++){
-            for (int j=0; j<M; j++){
-               if(cheeze[i][j]==0 && !visited[i][j]){
-                 int test =   boundarySearch(i,j);
-                   System.out.println("cheeze cnt = " + test);
-                    ++cnt;
-               }
+
+        while (flag) {
+            ++cnt;
+            visited = new boolean[N][M];
+            boundarySearch(0, 0);
+            int howManyCheeze = count();
+
+            if (howManyCheeze == 0) {
+                flag = false;
+            }else{
+                cheezeCnt.add(howManyCheeze);
             }
-            System.out.println("count() = " + count());
         }
-        System.out.println("seconds = " + cnt);
+        System.out.println(cnt);
+        if(cheezeCnt.size()>0){
+            System.out.println(cheezeCnt.get(cheezeCnt.size()-1));
+        }else{
+            System.out.println(initial);
+        }
+
     }
+
     public static int count(){
       int cnt = 0;
         for (int i=0; i<N; i++){
@@ -65,22 +69,19 @@ public class Boj2636_치즈 {
         return cnt;
     }
 
-
     //경계면 찾아서 1초 제한시간 걸어주기
-    public static int boundarySearch(int row, int col){
+    public static void boundarySearch(int row, int col){
         Queue<Node> q = new LinkedList<>();
 
         q.add(new Node(row,col));
         visited[0][0]=true;
-
         int cnt = 0;
         while(!q.isEmpty()){
             Node n = q.poll();
             putTime(n.x, n.y);
-            changeCheezeToAir();
-            ++cnt;
         }
-        return count();
+
+        changeCheezeToAir();
     }
     public static void putTime(int x, int y){
         for (int i=0; i<4; i++){
@@ -95,7 +96,6 @@ public class Boj2636_치즈 {
                     }else{
                         putTime(nx,ny);
                     }
-
                 }
             }
         }
@@ -105,25 +105,22 @@ public class Boj2636_치즈 {
         for (int i=0; i<N; i++){
             for (int j=0; j<M; j++){
                 if(time[i][j]==1){
-                    changeAir(i,j);
+                    cheeze[i][j]=0;
+                    time[i][j]=0;
                 }
             }
         }
     }
 
-    public static void changeAir(int x, int y){
-        for (int i=0; i<4; i++){
-            int nx = rows[i]+x;
-            int ny = cols[i]+y;
-
-            if(nx>=0 && ny>=0 && nx<N && ny<M){
-                if(cheeze[nx][ny]==1){
-                        cheeze[nx][ny]=0;
-                }
+    public static void printCheeze(){
+        for (int i=0; i<N; i++){
+            for (int j=0; j<M; j++){
+                System.out.print(cheeze[i][j]);
             }
+            System.out.println();
         }
+        System.out.println();
     }
-
 
     static class Node{
         int x;

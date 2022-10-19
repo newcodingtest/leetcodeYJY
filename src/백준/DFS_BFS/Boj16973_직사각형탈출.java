@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Boj16973_직사각형탈출 {
     static int N, M, H, W, S1, S2, F1, F2, CNT;
@@ -15,6 +13,8 @@ public class Boj16973_직사각형탈출 {
     static boolean[][] visited;
     static int[] row = {-1,1,0,0};
     static int[] col = {0,0,-1,1};
+
+    static List<Node> wall = new ArrayList<>();
     static Queue<Node>q = new LinkedList();
     public static void main(String[] args)throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,11 +27,15 @@ public class Boj16973_직사각형탈출 {
 
         arr = new int[N+1][M+1];
         visited = new boolean[N+1][M+1];
+        CNT=-1;
 
         for (int i=1; i<=N; i++){
             st = new StringTokenizer(br.readLine()," ");
             for (int j=1; j<=M; j++){
                 arr[i][j] = Integer.parseInt(st.nextToken());
+                if(arr[i][j]==1){
+                    wall.add(new Node(i,j,0));
+                }
             }
         }
         st = new StringTokenizer(br.readLine()," ");
@@ -45,6 +49,7 @@ public class Boj16973_직사각형탈출 {
         F2 = Integer.parseInt(st.nextToken());
 
         bfs(S1,S2);
+        System.out.println(CNT);
     }
 
     public static void bfs(int x, int y){
@@ -53,8 +58,7 @@ public class Boj16973_직사각형탈출 {
         while (!q.isEmpty()){
             Node n = q.poll();
             if(n.x==F1 && n.y==F2){
-                System.out.println(n.value);
-                System.exit(0);
+                CNT = n.value;
                 break;
             }
 
@@ -63,7 +67,6 @@ public class Boj16973_직사각형탈출 {
     }
 
     public static void isValid(int x, int y, int cnt){
-        visited[x][y]=true;
         for (int i=0; i<4; i++){
             int nx = row[i]+x;
             int ny = col[i]+y;
@@ -77,11 +80,9 @@ public class Boj16973_직사각형탈출 {
     }
 
     public static boolean isOtherValid(int x, int y){
-        for (int i=x; i<x+H; i++){
-            for (int j=y; j<y+W; j++){
-                if(i<1 || i>N || j<1 || j>M || arr[i][j]==1){
-                    return false;
-                }
+        for (Node n : wall){
+            if(n.x>=x && n.x<x+H && n.y>=y && n.y<y+W){
+                return false;
             }
         }
         return true;

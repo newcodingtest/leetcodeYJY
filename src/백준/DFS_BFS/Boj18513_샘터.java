@@ -6,12 +6,10 @@ import java.util.*;
 
 public class Boj18513_샘터 {
     static int N,K;
+    static int MAX = 100000000;
     static int[] move = {-1,1}; //왼, 오
-    static HashMap<Integer, Boolean> visited = new HashMap<>();
-    static List<Integer> sam = new ArrayList<>();
-    static List<Integer> house = new ArrayList<>();
-    static Queue<Integer> q = new LinkedList<>();
-    static int cnt = 0;
+    static HashSet<Integer> visited = new HashSet<>();
+    static Queue<Node> q = new LinkedList<>();
     public static void main(String[] args)throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -21,50 +19,47 @@ public class Boj18513_샘터 {
 
         st = new StringTokenizer(br.readLine());
         for (int i=0; i<N; i++){
-            q.add(Integer.parseInt(st.nextToken()));
-        }
-        bfs();
+            int tmp = Integer.parseInt(st.nextToken());
 
+            q.add(new Node(tmp,0));
+            visited.add(tmp);
+        }
+        System.out.println(bfs());
     }
 
-    public static void bfs(){
-        int sum=0;
+    public static long bfs(){
+        long result = 0;
+        int cnt = 0;
 
         while (!q.isEmpty()){
-            if(cnt==K){
-                System.out.println("sum = " + sum);
-                break;
-            }
-            int samul = q.poll();
+            Node n = q.poll();
 
             for (int i=0; i<2; i++){
-                Integer key = samul + move[i];
+                int key = n.x + move[i];
 
-                if(!isVisited(key)){
-                    visited.put(key,true);
-                    q.add(key);
-                    house.add(key);
-                    sum+=Math.abs(samul-key);
-                    ++cnt;
+                if(key<MAX && -MAX<key){
+                    if(!visited.contains(key)){
+                        cnt++;
+                        result += n.dist+1;
+
+                        if(cnt == K){ return result;}
+
+                        visited.add(key);
+                        q.add(new Node(key,n.dist+1));
+                    }
                 }
             }
         }
-    }
-
-    public static boolean isVisited(Integer key){
-        if (visited.containsKey(key)){
-            return true;
-        }
-        return false;
+     return result;
     }
 
     static class Node{
-        int key;
-        int cnt;
+        int x;
+        int dist;
 
-        public Node(int key, int cnt){
-            this.key = key;
-            this.cnt = cnt;
+        public Node(int x, int dist){
+            this.x = x;
+            this.dist = dist;
         }
     }
 }

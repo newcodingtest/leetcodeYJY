@@ -1,19 +1,30 @@
 package 백준.완전탐색;
 
 import java.io.BufferedReader;
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> origin/master
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class Boj1969_DNA {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     static int MIN;
     static int result = 0;
     static String[][] dna;
     static int[] ACGT;
     static StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
     public static void main(String[] args) throws IOException {
+=======
+    public static void main(String[] args)throws Exception{
+>>>>>>> origin/master
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -65,7 +76,11 @@ public class Boj1969_DNA {
         }
 
         System.out.println(sb.toString());
+<<<<<<< HEAD
         System.out.println(result);
+=======
+        System.out.println("result = " + result);
+>>>>>>> origin/master
     }
 
     public static void add(int n){
@@ -84,4 +99,8 @@ public class Boj1969_DNA {
                 break;
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }

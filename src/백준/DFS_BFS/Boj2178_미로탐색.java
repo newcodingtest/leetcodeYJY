@@ -45,7 +45,7 @@ public class Boj2178_미로탐색 {
             if(n.x+1==N && n.y+1==M){
                 System.out.println(n.cnt+1);
                 break;
-            }   
+            }
             isValid(n);
         }
     }

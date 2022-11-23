@@ -34,14 +34,9 @@ public class Boj2422_이탈리아가서아이스크림 {
         }
 
         for (int i=1; i<=N; i++){
-
-            if (!isVisited[i]){
-                isVisited[i]=true;
+            isVisited = new boolean[N+1];
                 dfs(i,1);
-            }
-
         }
-
         System.out.println(way);
     }
 
@@ -51,20 +46,20 @@ public class Boj2422_이탈리아가서아이스크림 {
             return;
         }
 
-        System.out.println("start = " + start);
-        for (int i=1; i<=N; i++){
-            if(i==start) {
-                continue;
-            }
+        for (int i=start+1; i<=N; i++){
 
             for (int elem : list[start]){
                 isVisited[elem]=true;
             }
 
             if(!isVisited[i]){
-                System.out.println("i = " + i);
+                isVisited[i]= true;
                 dfs(i,cnt+1);
                 isVisited[i]=false;
+            }
+
+            for (int elem : list[start]){
+                isVisited[elem]=false;
             }
 
         }

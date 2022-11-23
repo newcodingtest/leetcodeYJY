@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+
+//틀렸다고 나왔는데 이유를 모르겠음
 public class Boj15721_번데기 {
     static int A,T;
     static String N;
@@ -60,7 +62,7 @@ public class Boj15721_번데기 {
             if (cnt == T) {
                 return i % A;
             }
-
+    
         }
         return 0;
     }

@@ -86,7 +86,6 @@ public class Boj16234_인구이동 {
         }
 
         return sum;
-
     }
 
     public static void updatePopulation(int sum){

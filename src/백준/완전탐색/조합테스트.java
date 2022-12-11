@@ -17,6 +17,7 @@ public class 조합테스트 {
     }
 
 
+    //재귀
     public static void reculsive(String 타겟,int 뽑는개수,int 현재단계, int 총길이, boolean[] 방문){
         if(뽑는개수==0){
             print(타겟,방문,총길이);
@@ -32,6 +33,7 @@ public class 조합테스트 {
         reculsive(타겟,뽑는개수,현재단계+1,총길이,방문);
     }
 
+    //백트래킹
     public static void backTracking(String 타겟,int 뽑는개수,int 시작점, int 총길이, boolean[] 방문){
         if(뽑는개수==0){
             print(타겟,방문,총길이);

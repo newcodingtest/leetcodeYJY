@@ -29,6 +29,9 @@ public class 소수찾기 {
         }
     }
 
+    //143
+    //11 x 13 = 143이고, 143은 2,3,5,7로 나눠지지 않는 수이지만 소수가 아닙니다.
+    //그러기 때문에 단순 2357 으로 비교하는 조건만으로는 필터링이 안된다.
     public static boolean isValid(int num){
         if(num==0 || num==1){
             return false;

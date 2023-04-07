@@ -39,15 +39,15 @@ class Solution {
     
     //글자중 같은 자리의 한글자가 같은지 여부
     public static boolean isValid(String s1, String s2){
-       int result = s1.length();
+       int result = 0;
         for (int i=0; i<s1.length(); i++){
-            if(s1.charAt(i)==s2.charAt(i)){
-                --result;
+            if(s1.charAt(i)!=s2.charAt(i)){
+                ++result;
+                if(result>1){
+                    return false;
+                }
             }
         }
-        if(result==1){
-            return true;
-        }
-        return false;
+        return true;
     }
 }

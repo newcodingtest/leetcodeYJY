@@ -1,0 +1,118 @@
+``` public class test1 {
+    //아래,위,오른,왼
+    static int[] moveWidth = {0,0,1,-1};
+    static int[] moveHeight = {1,-1,0,0};
+   static List<int[][]>tetris = new ArrayList<>();
+    static boolean[][] isCounting;
+    static int tetrisCnt = 0;
+    public static void main(String[] args) {
+        int[][] gameboard1 = {
+                {1,1,0,0,1,0},
+                {0,0,1,0,1,0},
+                {0,1,1,0,0,1},
+                {1,1,0,1,1,1},
+                {1,0,0,0,1,0},
+                {0,1,1,1,0,0},
+        };
+
+        int[][] table1 = {
+                {1,0,0,1,1,0},
+                {1,0,1,0,1,0},
+                {0,1,1,0,1,1},
+                {0,0,1,0,0,0},
+                {1,1,0,1,1,0},
+                {0,1,0,0,0,0},
+        };
+        //14
+
+        int[][] gameboard2 = {
+                {0,0,0},
+                {1,1,0},
+                {1,1,1},
+        };
+
+        int[][] table2 = {
+                {1,1,1},
+                {1,0,0},
+                {0,0,0},
+        };
+        //0
+        isCounting = new boolean[table1.length][table1[0].length];
+        for(int i=0; i<table1.length; i++){
+            for (int j=0; j<table1[0].length; j++){
+                if(!isCounting[i][j]&&table1[i][j]!=0){
+                   tetris.add(countTetris(table1,i,j));
+                }
+            }
+        }
+
+        System.out.println(tetris.size());
+
+    }
+
+//    조각은 한 번에 하나씩 채워 넣습니다.
+//    조각을 회전시킬 수 있습니다.
+//    조각을 뒤집을 수는 없습니다.
+//    게임 보드에 새로 채워 넣은 퍼즐 조각과 인접한 칸이 비어있으면 안 됩니다.
+    public int solution(int[][] game_board, int[][] table) {
+        isCounting = new boolean[table.length][table[0].length];
+
+        int answer = -1;
+
+        for(int i=0; i<table.length; i++){
+            for (int j=0; j<table[0].length; j++){
+                if(!isCounting[i][j]){
+                   countTetris(table,i,j);
+                }
+            }
+        }
+        return 0;
+    }
+    
+    //table 에서 도형이 몇개인지 카운팅
+    public static int[][] countTetris(int[][] target, int col, int row){
+        int[][] visited = new int[target.length][target[0].length];
+        Queue<Point>q = new LinkedList<>();
+        q.add(new Point(col,row));
+
+        while (!q.isEmpty()){
+            Point n = q.poll();
+            int pcol = n.col;
+            int prow = n.row;
+
+            visited[pcol][prow]=1;
+            isCounting[pcol][prow] = true;
+
+            for (int k = 0; k < 4; k++) {
+                int scol = moveHeight[k] + pcol;
+                int srow = moveWidth[k] + prow;
+
+                if (scol >= 0 && srow >= 0 && scol <= target.length - 1 && srow <= target[0].length - 1) {
+                    if (target[scol][srow]!=0 && !isCounting[scol][srow]) {
+                        visited[scol][srow]=1;
+                        isCounting[scol][srow] = true;
+                        q.add(new Point(scol,srow));
+                    }
+                }
+            }
+        }
+
+        return visited;
+    }
+
+
+
+    //회전 메소드
+
+    static class Point{
+        int col;
+        int row;
+
+        public Point(int col, int row){
+            this.col = col;
+            this.row = row;
+
+        }
+    }
+
+} ```

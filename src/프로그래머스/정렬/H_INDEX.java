@@ -2,7 +2,7 @@ package 프로그래머스.정렬;
 
 import java.util.Arrays;
 
-public class H_INDEX {
+public class H_INDEX { 
     public static void main(String[] args) {
         int[] citations = {3,0,6,1,5};
 

@@ -2,29 +2,26 @@ import java.util.*;
 
 
 class Solution {
-        private static List<String> cache = new ArrayList<>();
-    public static int solution(int cacheSize, String[] cities) {
+    private static Map<String, Integer> cache;
+   public static int solution(int cacheSize, String[] cities) {
+        cache = new LinkedHashMap<>(cacheSize, 0.75f, true){
+          @Override
+          protected boolean removeEldestEntry(Map.Entry eldest) {
+              return size() > cacheSize;
+          }
+        };
+
         int answer = 0;
-
-        if (cacheSize == 0){
-            return cities.length * 5;
-        }
-
         for (String city : cities){
             String elem = city.toLowerCase();
-            
-            if (cache.contains(elem)){
-                answer++;
-                cache.remove(elem);
-                cache.add(elem);
+            if (cache.containsKey(elem)){
+                answer+=1;
             } else {
                 answer+=5;
-                if (cache.size() == cacheSize){
-                    cache.remove(0);
-                }
-                cache.add(elem);
             }
+            cache.put(elem, 0);
         }
+
         return answer;
     }
 }

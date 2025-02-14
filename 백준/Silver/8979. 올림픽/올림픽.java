@@ -29,7 +29,7 @@ public class Main {
         }
         Arrays.sort(sum);
         int rank = 1;
-        for (int i=0; i<N; i++){
+       for (int i=N-1; i>=0; i--){
             if (sum[i]==value){
                 System.out.println(rank);
                 break;

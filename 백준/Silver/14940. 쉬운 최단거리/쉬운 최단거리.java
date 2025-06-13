@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -26,6 +27,9 @@ public class Main {
         map = new int[col][row];
         dp = new int[col][row];
 
+        for (int i=0; i<map.length; i++){
+            Arrays.fill(dp[i], -1);
+        }
 
         for (int i=0; i<col; i++) {
             st = new StringTokenizer(br.readLine());
@@ -39,13 +43,13 @@ public class Main {
                     dp[i][j] = 0;
                 } else if(elem==0){
                     isVisited[i][j] = true;
+                    dp[i][j] = 0;
                 }
             }
         }
 
       bfs(startCol, startRow);
-      fillOfMinusCantGoArea();
-        
+
       StringBuilder sb = new StringBuilder();
       for (int i=0; i<map.length; i++){
           for (int j=0; j<map[0].length; j++){
@@ -93,15 +97,5 @@ public class Main {
         }
         return true;
     }
-    
-        private static void fillOfMinusCantGoArea(){
-        for (int i=0; i<map.length; i++){
-            for (int j=0; j<map[0].length; j++){
-                if (!isVisited[i][j]){
-                    isVisited[i][j]=true;
-                    dp[i][j] = -1;
-                }
-            }
-        }
-    }
+
 }

@@ -27,7 +27,7 @@ public class Main {
         int startCol = 0;
         int startRow = 0;
 
-        Queue<Fire> fire = new LinkedList<>();
+        Queue<Fire> fire = new ArrayDeque<>();
 
         for (int i=0; i<col; i++){
             String str = br.readLine();
@@ -67,7 +67,7 @@ public class Main {
       }
         isVisited = new boolean[isVisited.length][isVisited[0].length];
 
-        Queue<int[]>q = new LinkedList<>();
+        Queue<int[]>q = new ArrayDeque<>();
         q.add(new int[]{col,row,0});
         isVisited[col][row] = true;
 

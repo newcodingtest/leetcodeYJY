@@ -1,81 +1,82 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.*;
+import java.util.*;
 
-class Main{ 
+public class Main {
+    static int[] moveRow = {-1,1,0,0};
+    static int[] moveCol = {0,0,-1,1};
+    static StringBuilder sb = new StringBuilder();
+    static boolean[] isVisited = new boolean[25];
     static char[][] map;
-    static boolean[] visit,check;
-    static int[] select;
-    static int result;
-    static int[] dirX = {-1,1,0,0};
-    static int[] dirY = {0,0,-1,1};
-    public static void main(String[] args) throws IOException{
+    static int[] seven = new int[7];
+    static int answer = 0;
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         map = new char[5][5];
-        for(int i = 0; i < 5; i++){
-            map[i] = br.readLine().toCharArray();
+        for (int i=0; i<5; i++){
+            String str = br.readLine();
+            for (int j=0; j<str.length(); j++){
+                map[i][j] = str.charAt(j);
+            }
         }
-        visit = new boolean[25];
-        select = new int[7];
-        find(0,0,0);
-        System.out.println(result);
+
+
+        comb(0,0,0);
+
+        System.out.print(answer);
     }
-    // 가능한 조합 7개 뽑기
-    private static void find(int idx, int count, int s) {
-        if(count == 7){
-            if(s >= 4){
-                if(checkLink()){
-                    result++;
+
+    private static void comb(int idx, int count, int s){
+        if (count==7){
+            if(s>=4){
+                if (isLinked()){
+                    answer++;
                 }
             }
             return;
         }
 
-        for(int i = idx; i < 25; i++){
-            visit[i] = true;
+        for (int i=idx; i<25; i++){
+            isVisited[i]=true;
 
-            // 선택
-            select[count] = i;
+            seven[count]=i;
 
-            // 다솜파인지 확인
-            if(map[i/5][i%5]=='S'){
-                find(i+1,count+1,s+1);
-            }else{
-                find(i+1,count+1,s);
+            char elem = map[i/5][i%5];
+            if (elem=='S'){
+                comb(i+1, count+1, s+1);
+            } else {
+                comb(i+1, count+1, s);
             }
 
-            visit[i] = false;
+            isVisited[i]=false;
         }
+
+
     }
 
-    private static boolean checkLink(){
-        Queue<Integer> q = new LinkedList<>();
-        q.add(select[0]);
-        int count = 1;
-        check = new boolean[25];
-        
-        while(!q.isEmpty()){
-            int now = q.poll();
-            check[now] = true;
+    private static boolean isLinked() {
+        Queue<Integer>q = new ArrayDeque<>();
+        q.add(seven[0]);
+        boolean[] check = new boolean[25];
+        check[seven[0]] = true;
 
-            for(int i = 0; i < 4; i++){
-                int nx = (now/5) + dirX[i];
-                int ny = (now%5) + dirY[i];
+        int cnt = 1;
+        while (!q.isEmpty()){
+            int location = q.poll();
 
-                if(nx < 0 || nx >= 5 || ny <0 || ny >=5){
-                    continue;
-                }
-                int nextPos = nx * 5 + ny;
-                if(check[nextPos] || !visit[nextPos]) continue;
+            for (int i=0; i<4; i++){
+                int col = (location/5)+moveCol[i];
+                int row = (location%5)+moveRow[i];
 
-                count++;
-                check[nextPos] = true;
-                q.add(nextPos);
+                if (col<0 || row<0 || col>=5 || row>=5) continue;
+                int newLocation = 5*col+row;
+                if (!isVisited[newLocation] || check[newLocation]) continue;
+                check[newLocation]=true;
+                q.add(newLocation);
+                cnt++;
             }
         }
 
-        return count == 7;
+        return cnt==7;
     }
 }

@@ -64,8 +64,6 @@ class Solution {
             String x1 = cur[0];
             String x2 = cur[1];
 
-            System.out.println(x1 +" : " +counting.get(x1));
-            System.out.println(x2 +" : " +counting.get(x2));
             String alpabet = counting.get(x1)>=counting.get(x2)?x1:x2;
 
             sb.append(alpabet);
